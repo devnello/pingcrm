@@ -2,6 +2,7 @@
   <div>
     <Head title="Reports" />
     <h1 class="mb-8 text-3xl font-bold">Reports</h1>
+    <h1 class="mb-0 text-3xl font-bold">{{ report.nombre }}</h1>
   </div>
 </template>
 
@@ -14,5 +15,8 @@ export default {
     Head,
   },
   layout: Layout,
+  props: {
+    report: Object,
+  },
 }
 </script>
