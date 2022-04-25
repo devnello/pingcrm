@@ -1,0 +1,35 @@
+.main-background {
+    background-image: url(/images/background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor {
+    max-width: 120rem;
+    width: 90%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.centrar-texto {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 2rem;
+}
+

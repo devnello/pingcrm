@@ -1,0 +1,118 @@
+@include('header')
+
+@include('footer')
+
+
+href
+href="{{ route('servicios') }}"
+
+Imagen
+src="{{ URL::to('/') }}/images/logo.png"
+
+
+GitHub, but initial commit failed: Author identity unknown *** Please tell me who you are.
+Run
+git config --global user.email "marcello.spedicato@gmail.com"
+git config --global user.name "Your Name"
+to set your account's default identity. Omit --global to set the identity only in this repository. unable to auto-detect email address (got 'marce@LAPTOP-ND4UM4P4.(none)')
+
+
+sudo chmod -R 777 storage/
+sudo chmod -R 777 bootstrap/cache/
+APP_KEY=base64:45VDqkV+MqcfKafIN/Kwd8ICgG/zyBXKhBOoQNy26d8=
+
+*** EN IONOS
+.htaccess
+<IfModule mod_rewrite.c>
+    -----------------------------------------------------------------
+    RewriteBase / -> Añadido porqué sin no funcionaba
+    -----------------------------------------------------------------
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+
+# ERROR: Failed to open stream: No such file or directory
+php artisan config:cache
+php artisan config:clear
+composer dump-autoload -o
+
+# Creat controller
+php artisan make:controller RestauranteController -r
+php artisan route:list
+
+php artisan make:model Opciones
+php artisan make:controller OpcionesController -r
+
+
+php artisan make:model Nivel_1
+php artisan make:controller Nivel_1Controller -r
+
+php artisan make:model Nivel_2
+php artisan make:controller Nivel_2Controller -r
+
+
+
+php artisan make:model General
+php artisan make:controller GeneralController -r
+
+
+php artisan make:model Documento
+php artisan make:controller DocumentoController -r
+
+
+php artisan make:model Capitulo
+php artisan make:controller CapituloController -r
+
+
+php artisan make:model Parrafo
+php artisan make:controller ParrafoController -r
+
+-----------------------------------------------------
+1) find($id) takes an id and returns a single model. If no matching model exist, it returns null.
+
+2) findOrFail($id) takes an id and returns a single model. If no matching model exist, it throws an error1.
+
+3) first() returns the first record found in the database. If no matching model exist, it returns null.
+
+4) firstOrFail() returns the first record found in the database. If no matching model exist, it throws an error1.
+
+5) get() returns a collection of models matching the query.
+
+6) pluck($column) returns a collection of just the values in the given column. In previous versions of Laravel this method was called lists.
+
+7) toArray() converts the model/collection into a simple PHP array.
+-----------------------------------------------------
+
+Note: a collection is a beefed up array. It functions similarly to an array, but has a lot of added functionality, as you can see in the docs.
+
+Unfortunately, PHP doesn't let you use a collection object everywhere you can use an array.
+For example, using a collection in a foreach loop is ok, put passing it to array_map is not.
+Similarly, if you type-hint an argument as array, PHP won't let you pass it a collection.
+Starting in PHP 7.1, there is the iterable typehint, which can be used to accept both arrays and collections.
+
+If you ever want to get a plain array from a collection, call its all() method.
+
+
+/*
+|| TINKER: php artisan tinker
+*/
+
+echo \App\Models\User::find(5)->descripcion;

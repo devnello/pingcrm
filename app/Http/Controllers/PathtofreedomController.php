@@ -8,6 +8,6 @@ class PathtofreedomController extends Controller
 {
     public function index()
     {
-        return Inertia::render('PathToFreedom/Index');
+        return Inertia::render('Capitulo/Index');
     }
 }

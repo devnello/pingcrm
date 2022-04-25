@@ -1,15 +1,17 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CapituloController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\PathtofreedomController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Capitulo;
+use Inertia\Inertia;
+use \App\Models\Parrafo;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,7 +150,30 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 
-// PathtoFreedom
+// Capitulo
+/*
+Route::get('/', [CapituloController::class, 'index'])
+    ->name('capitulo');
+*/
 
-Route::get('/', [PathtofreedomController::class, 'index'])
-    ->name('pathtofreedom');
+Route::get('/', function () {
+    return Inertia::render('Capitulo/Index', [
+        'capitulos' => Capitulo::all(),
+    ]);
+});
+
+
+Route::get('/capitulo/{id}', function ($id) {
+    return Inertia::render('Capitulo/Show', [
+        'capitulos' => Capitulo::find($id),
+    ]);
+});
+
+Route::get('/capitulo/{id}/parrafo', function ($id) {
+    return Inertia::render('Parrafo/Index', [
+        'data' => [
+            'capitulo' => Capitulo::find($id),
+            'parrafos' => Capitulo::find($id)->parrafos,
+        ]
+    ]);
+});

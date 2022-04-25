@@ -1,6 +1,7 @@
 /* Reset */
 @import 'tailwindcss/base';
 @import 'reset';
+@import 'body';
 
 /* Components */
 @import 'tailwindcss/components';
