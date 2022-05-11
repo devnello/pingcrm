@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\CapituloController;
+use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -177,3 +177,42 @@ Route::get('/capitulo/{id}/parrafo', function ($id) {
         ]
     ]);
 });
+
+/*
+ *
+ *
+ *  BACK-END
+ *
+ *
+ *
+ */
+
+// Documentos
+
+Route::get('documentos', [DocumentoController::class, 'index'])
+    ->name('documentos')
+    ->middleware('auth');
+
+Route::get('documentos/create', [DocumentoController::class, 'create'])
+    ->name('documentos.create')
+    ->middleware('auth');
+
+Route::post('documentos', [DocumentoController::class, 'store'])
+    ->name('documentos.store')
+    ->middleware('auth');
+
+Route::get('documentos/{id}/edit', [DocumentoController::class, 'edit'])
+    ->name('documentos.edit')
+    ->middleware('auth');
+
+Route::put('documentos/{id}', [DocumentoController::class, 'update'])
+    ->name('documentos.update')
+    ->middleware('auth');
+
+Route::delete('documentos/{id}', [DocumentoController::class, 'destroy'])
+    ->name('documentos.destroy')
+    ->middleware('auth');
+
+Route::put('documentos/{id}/restore', [DocumentoController::class, 'restore'])
+    ->name('documentos.restore')
+    ->middleware('auth');
