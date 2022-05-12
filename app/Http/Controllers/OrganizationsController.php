@@ -52,6 +52,7 @@ class OrganizationsController extends Controller
         return Redirect::route('organizations')->with('success', 'Organization created.');
     }
 
+    // public function edit(Organization $organization)
     public function edit(Organization $organization)
     {
         return Inertia::render('Organizations/Edit', [

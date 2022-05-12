@@ -1,17 +1,28 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\DocumentoController;
+
+//
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+
+//
 use Illuminate\Support\Facades\Route;
-use App\Models\Capitulo;
 use Inertia\Inertia;
+
+//
+use App\Models\Capitulo;
 use \App\Models\Parrafo;
+
+// PathTofree
+use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\CapituloController;
+use App\Http\Controllers\ParrafoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -215,4 +226,65 @@ Route::delete('documentos/{id}', [DocumentoController::class, 'destroy'])
 
 Route::put('documentos/{id}/restore', [DocumentoController::class, 'restore'])
     ->name('documentos.restore')
+    ->middleware('auth');
+
+//
+// Capitulo
+//
+Route::get('capitulos/{id}/index', [CapituloController::class, 'index'])
+    ->name('capitulos.index')
+    ->middleware('auth');
+
+Route::get('capitulos/create', [CapituloController::class, 'create'])
+    ->name('capitulos.create')
+    ->middleware('auth');
+
+Route::post('capitulos', [CapituloController::class, 'store'])
+    ->name('capitulos.store')
+    ->middleware('auth');
+
+Route::get('capitulos/{id}/edit', [CapituloController::class, 'edit'])
+    ->name('capitulos.edit')
+    ->middleware('auth');
+
+Route::put('capitulos/{id}', [CapituloController::class, 'update'])
+    ->name('capitulos.update')
+    ->middleware('auth');
+
+Route::delete('capitulos/{id}', [CapituloController::class, 'destroy'])
+    ->name('capitulos.destroy')
+    ->middleware('auth');
+
+Route::put('capitulos/{id}/restore', [CapituloController::class, 'restore'])
+    ->name('capitulos.restore')
+    ->middleware('auth');
+
+// Parrafo
+
+Route::get('parrafos', [ParrafoController::class, 'index'])
+    ->name('parrafos')
+    ->middleware('auth');
+
+Route::get('parrafos/create', [ParrafoController::class, 'create'])
+    ->name('parrafos.create')
+    ->middleware('auth');
+
+Route::post('parrafos', [ParrafoController::class, 'store'])
+    ->name('parrafos.store')
+    ->middleware('auth');
+
+Route::get('parrafos/{id}/edit', [ParrafoController::class, 'edit'])
+    ->name('parrafos.edit')
+    ->middleware('auth');
+
+Route::put('parrafos/{id}', [ParrafoController::class, 'update'])
+    ->name('parrafos.update')
+    ->middleware('auth');
+
+Route::delete('parrafos/{id}', [ParrafoController::class, 'destroy'])
+    ->name('parrafos.destroy')
+    ->middleware('auth');
+
+Route::put('parrafos/{id}/restore', [ParrafoController::class, 'restore'])
+    ->name('parrafos.restore')
     ->middleware('auth');

@@ -106,7 +106,7 @@ class User extends Authenticatable
 
     // MSP Nuevo
 
-    public function documento()
+    public function documentos()
     {
         return $this->hasMany(Documento::class);
     }

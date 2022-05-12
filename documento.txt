@@ -116,3 +116,5 @@ If you ever want to get a plain array from a collection, call its all() method.
 */
 
 echo \App\Models\User::find(5)->descripcion;
+
+echo \App\Models\Documento::find(1);
