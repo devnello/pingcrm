@@ -13,8 +13,6 @@ class Parrafo extends Model
     use SoftDeletes;
     protected $table = 'pto_parrafos';
 
-
-
     // MSP
     public function capitulo()
     {
