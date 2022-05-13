@@ -8,15 +8,16 @@
         <h2 id="parrafo">{{ descripcion_cap }}</h2>
       </div>
 
-      <div v-if="parrafos[index].descripcion" class="border-2 border-solid border-black text-center my-2 py-3">
-        <p>{{ parrafos[index].descripcion }}</p>
+      <div v-if="parrafos[index].descripcion" class="border-2 border-solid border-black text-center my-2 py-3"
+           v-html="parseFromString(parrafos[index].descripcion)">
       </div>
 
       <div class="flex flex-row justify-between">
         <button :disabled="index === 0" class="border-2 border-solid border-black" v-on:click="decrement">
           <img src="/images/antes.svg" alt="boton antes">
         </button>
-        <button :disabled="index === parrafos.length - 1" class="border-2 border-solid border-black" v-on:click="increment">
+        <button :disabled="index === parrafos.length - 1" class="border-2 border-solid border-black"
+                v-on:click="increment">
           <img src="/images/siguiente.svg" alt="boton siguiente">
         </button>
       </div>
@@ -63,16 +64,23 @@ export default {
   methods: {
     increment() {
       this.index++
-      if (this.index > this.parrafos.length - 1 ) {
+      if (this.index > this.parrafos.length - 1) {
         this.index = this.parrafos.length - 1
       }
     },
     decrement() {
       this.index--
-      if (this.index < 0 ) {
+      if (this.index < 0) {
         this.index = 0
       }
     },
+    parseFromString(str) {
+      var parser = new DOMParser()
+      var doc = parser.parseFromString('<p><strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u></p>', 'text/html')
+      console.log(doc)
+      console.log(doc.body.innerHTML)
+      return doc.body.innerHTML
+    }
   }
 }
 </script>

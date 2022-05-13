@@ -9,6 +9,7 @@
     <trashed-message v-if="documento.deleted_at" class="mb-6" @restore="restore"> This documento has been
       deleted.
     </trashed-message>
+
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
@@ -41,8 +42,16 @@
         </div>
       </form>
     </div>
-    <h2 class="mt-12 text-2xl font-bold">Capitulos</h2>
-    <div class="mt-6 bg-white rounded shadow overflow-x-auto">
+
+    <div class="flex flex-row justify-between items-center mt-20">
+      <h2 class="text-2xl font-bold">Capitulos</h2>
+      <div class="flex items-center bg-gray-50 border-t border-gray-100">
+        <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Nuevo Capitulo
+        </loading-button>
+      </div>
+    </div>
+
+    <div class="mt-1 bg-white rounded shadow overflow-x-auto">
 
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
