@@ -1,16 +1,19 @@
 <template>
+  <user-menu/>
   <main class="contenedor h-screen">
     <h1 class="mb-10 pt-10 text-center text-3xl font-bold">Historias Universitario</h1>
     <div>
-      <img class="mx-auto" src="/images/chatbot.png" alt="">
+      <img class="mx-auto" src="/images/chatbot.png" alt=""/>
       <div class="border-2 border-solid rounded border-black m-10">
         <div id="texto_imagen" class="text-center">
-          <p class="m-10 font-bold">Vas a ver en esta sección:
+          <p class="m-10 font-bold">
+            Vas a ver en esta sección:
             <span class="text-red-900 font-black">{{ descripcion }}</span>
           </p>
           <div class="flex flex-row justify-around m-10">
             <Link href="/">
-              <button class="
+              <button
+                class="
               w-32
               bg-white
               text-black
@@ -19,13 +22,15 @@
               border-black
               hover:bg-black
               hover:text-white
-              rounded">
+              rounded"
+              >
                 Atrás..
               </button>
             </Link>
             <p id="span_imagen">Texto a cambiar</p>
             <Link :href="`/capitulo/${capitulos.id}/parrafo`">
-              <button class="
+              <button
+                class="
               w-32
               bg-white
               text-black
@@ -34,7 +39,9 @@
               border-black
               hover:bg-black
               hover:text-white
-              rounded">.. Continuar
+              rounded"
+              >
+                .. Continuar
               </button>
             </Link>
           </div>
@@ -46,23 +53,19 @@
 
 <script>
 
-import Icon from "@/Shared/Icon";
-import {Link} from "@inertiajs/inertia-vue3";
+import Icon from '@/Shared/Icon'
+import {Link} from '@inertiajs/inertia-vue3'
+import UserMenu from '@/Shared/UserMenu'
 
 export default {
   name: 'CapituloShow',
   components: {
     Icon,
     Link,
+    UserMenu,
   },
   props: {
     capitulos: Object,
-  },
-  beforeCreate() {
-    // document.querySelector('body').setAttribute('style', 'background:#fff')
-  },
-  beforeUnmount() {
-    // document.querySelector('body').setAttribute('style', '')
   },
   data() {
     return {
@@ -76,6 +79,12 @@ export default {
         'ludwig-heinrich-edler-von-mises.png', 'milton-friedman.png', 'murray-newton-rothbard.png',
         'robert-nozick.png', 'walter-block.png'],
     }
+  },
+  beforeCreate() {
+    // document.querySelector('body').setAttribute('style', 'background:#fff')
+  },
+  beforeUnmount() {
+    // document.querySelector('body').setAttribute('style', '')
   },
 }
 </script>

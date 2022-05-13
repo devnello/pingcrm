@@ -160,8 +160,10 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->where('path', '.*')
     ->name('image');
 
+//
+// WEB - Frontend
+//
 
-// Capitulo
 /*
 Route::get('/', [CapituloController::class, 'index'])
     ->name('capitulo');

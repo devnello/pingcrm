@@ -1,49 +1,90 @@
 <template>
+  <user-menu/>
   <main class="contenedor h-screen">
     <h1 class="mb-10 pt-10 text-center text-3xl font-bold">Historias Universitario</h1>
     <div>
-      <img class="mx-auto" src="/images/chatbot.png" alt="">
+      <!--Imagen Bot-->
+      <img class="w-40 mx-auto" src="/images/chatbot.png" alt="Imagen chatbot"/>
 
-      <div class="border-2 border-solid border-black text-center my-2 py-3">
-        <h2 id="parrafo">{{ descripcion_cap }}</h2>
+      <!--Navegación-->
+      <div class="flex flex-row justify-between mt-4">
+        <div>
+          <button
+            :disabled="index === 0"
+            class="border-2 border-solid border-black mr-1"
+            @click="inicio"
+          >
+            <img src="/images/antes.svg" alt="boton antes"/>
+          </button>
+          <button
+            :disabled="index === 0"
+            class="border-2 border-solid border-black"
+            @click="decrement"
+          >
+            <img src="/images/antes.svg" alt="boton antes"/>
+          </button>
+        </div>
+
+        <!--Contador paginas-->
+        <p class="font-bold">{{ index + 1 }}/{{ parrafos.length }}</p>
+
+        <div>
+          <button
+            :disabled="index === parrafos.length - 1"
+            class="bg-gray-200
+                       border-2
+                       border-solid
+                       border-black
+                       hover:bg-orange-100
+                       mr-1"
+            @click="increment"
+          >
+            <img src="/images/siguiente.svg" alt="boton siguiente"/>
+          </button>
+          <button
+            :disabled="index === parrafos.length - 1"
+            class="bg-gray-200
+                       border-2
+                       border-solid
+                       border-black
+                       hover:bg-orange-100"
+            @click="fin"
+          >
+            <img src="/images/siguiente.svg" alt="boton siguiente"/>
+          </button>
+        </div>
       </div>
 
-      <div v-if="parrafos[index].descripcion" class="border-2 border-solid border-black text-center my-2 py-3"
-           v-html="parseFromString(parrafos[index].descripcion)">
+      <!--Titulo-->
+      <div class="border-2 border-solid border-black rounded-2xl text-center my-2 py-3">
+        <h1 id="parrafo" class="text-4xl">{{ descripcion_cap }}</h1>
       </div>
 
-      <div class="flex flex-row justify-between">
-        <button :disabled="index === 0" class="border-2 border-solid border-black" v-on:click="decrement">
-          <img src="/images/antes.svg" alt="boton antes">
-        </button>
-        <button :disabled="index === parrafos.length - 1" class="border-2 border-solid border-black"
-                v-on:click="increment">
-          <img src="/images/siguiente.svg" alt="boton siguiente">
-        </button>
-      </div>
+      <!--Parrafo-->
+      <div
+        v-if="parrafos[index].descripcion"
+        class="border-2 border-solid border-black rounded-2xl text-center my-2 py-3"
+        v-html="parseFromString(parrafos[index].descripcion)"
+      />
     </div>
   </main>
 </template>
 
 <script>
 
-import Icon from "@/Shared/Icon";
-import {Link} from "@inertiajs/inertia-vue3";
+import Icon from '@/Shared/Icon'
+import {Link} from '@inertiajs/inertia-vue3'
+import UserMenu from "@/Shared/UserMenu";
 
 export default {
   name: 'ParrafoIndex',
   components: {
     Icon,
     Link,
+    UserMenu
   },
   props: {
     data: Object,
-  },
-  beforeCreate() {
-    // document.querySelector('body').setAttribute('style', 'background:#fff')
-  },
-  beforeUnmount() {
-    // document.querySelector('body').setAttribute('style', '')
   },
   data() {
     return {
@@ -61,6 +102,12 @@ export default {
         'robert-nozick.png', 'walter-block.png'],
     }
   },
+  beforeCreate() {
+    // document.querySelector('body').setAttribute('style', 'background:#fff')
+  },
+  beforeUnmount() {
+    // document.querySelector('body').setAttribute('style', '')
+  },
   methods: {
     increment() {
       this.index++
@@ -74,12 +121,18 @@ export default {
         this.index = 0
       }
     },
+    inicio() {
+      this.index = 0
+    },
+    fin() {
+      this.index = this.parrafos.length - 1
+    },
     parseFromString(str) {
       let parser = new DOMParser()
       let doc = parser.parseFromString(str, 'text/html')
       return doc.body.innerHTML
-    }
-  }
+    },
+  },
 }
 </script>
 

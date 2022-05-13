@@ -1,11 +1,12 @@
 <template>
+  <user-menu />
   <main class="container">
     <h1 class="mb-10 pt-10 text-center text-3xl font-bold">Historias Universitario</h1>
     <div id="id_grid" class="grid grid-cols-4">
       <template v-for="capitulo in capitulos">
         <div class="flex flex-col justify-between imagen_div texto texto_margen mx-5 my-10 border-2 border-black">
           <Link :href="`/capitulo/${capitulo.id}`">
-            <img class="max-h-48 mx-auto p-3" :src="'/images/' + capitulo.imagen" alt=""/>
+            <img class="max-h-48 mx-auto p-3" :src="'/images/' + capitulo.imagen" alt="" />
           </Link>
           <h2 id="texto_Imagen" class="h-8 my-5 text-center font-bold">
             <span class="text-red-900 font-black">{{ capitulo.descripcion }}</span>
@@ -18,23 +19,19 @@
 
 <script>
 
-import Icon from "@/Shared/Icon";
-import {Link} from "@inertiajs/inertia-vue3";
+import Icon from '@/Shared/Icon'
+import {Link} from '@inertiajs/inertia-vue3'
+import UserMenu from '@/Shared/UserMenu'
 
 export default {
   name: 'CapitulosIndex',
   components: {
     Icon,
     Link,
-  },
-  beforeCreate() {
-    // document.querySelector('body').setAttribute('style', 'background:#fff')
+    UserMenu
   },
   props: {
     capitulos: Object,
-  },
-  beforeUnmount() {
-    // document.querySelector('body').setAttribute('style', '')
   },
   data() {
     return {
@@ -47,6 +44,12 @@ export default {
         'ludwig-heinrich-edler-von-mises.png', 'milton-friedman.png', 'murray-newton-rothbard.png',
         'robert-nozick.png', 'walter-block.png'],
     }
+  },
+  beforeCreate() {
+    // document.querySelector('body').setAttribute('style', 'background:#fff')
+  },
+  beforeUnmount() {
+    // document.querySelector('body').setAttribute('style', '')
   },
 }
 </script>
