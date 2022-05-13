@@ -10,11 +10,11 @@
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.orden" :error="form.errors.orden" class="pb-8 pr-6 w-full lg:w-1/2" label="Orden" />
           <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
-<!--          <text-input v-model="form.flg_pref" :error="form.errors.flg_pref" class="pb-8 pr-6 w-full lg:w-1/2" label="Preferente" />-->
+<!--          <text-input v-model="form.publicado" :error="form.errors.publicado" class="pb-8 pr-6 w-full lg:w-1/2" label="Publicado" />-->
 
           <label class="flex items-center mt-6 select-none" for="remember">
-            <input id="preferente" v-model="form.flg_pref" class="mr-1" type="checkbox" />
-            <span class="text-sm">¿Preferente?</span>
+            <input id="publicado" v-model="form.publicado" class="mr-1" type="checkbox" />
+            <span class="text-sm">¿Publicado?</span>
           </label>
 
           <!--      <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" label="Address" />
@@ -57,7 +57,7 @@ export default {
       form: this.$inertia.form({
         orden: null,
         descripcion: null,
-        flg_pref: false,
+        publicado: false,
       }),
     }
   },

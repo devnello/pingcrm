@@ -28,8 +28,8 @@
           <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2"
                       label="Descripción"/>
           <label class="flex items-center mt-6 select-none" for="remember">
-            <input id="preferente" v-model="form.publicado" class="mr-1" type="checkbox"/>
-            <span class="text-sm">¿Preferente?</span>
+            <input id="publicado" v-model="form.publicado" class="mr-1" type="checkbox"/>
+            <span class="text-sm">¿Publicado?</span>
           </label>
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
@@ -64,9 +64,13 @@
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/parrafos/${parrafo.id}/edit`" tabindex="-1">
+<!--            <Link class="flex items-center px-6 py-4" :href="`/parrafos/${parrafo.id}/edit`" tabindex="-1">
               {{ parrafo.descripcion }}
-            </Link>
+            </Link>-->
+            <div
+              class="flex items-center px-6 py-4"
+              v-html="parseFromString(parrafo.descripcion)"
+            />
           </td>
           <td class="w-px border-t">
             <Link class="flex items-center px-4" :href="`/parrafos/${parrafo.id}/edit`" tabindex="-1">
@@ -145,6 +149,11 @@ export default {
       if (confirm('Are you sure you want to restore this contact?')) {
         this.$inertia.put(`/capitulos/${this.capitulo.id}/restore`)
       }
+    },
+    parseFromString(str) {
+      let parser = new DOMParser()
+      let doc = parser.parseFromString(str, 'text/html')
+      return doc.body.innerHTML
     },
   },
 }

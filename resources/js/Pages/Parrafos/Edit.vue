@@ -16,8 +16,8 @@
           <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2"
                       label="Descripción"/>
           <label class="flex items-center mt-6 select-none" for="remember">
-            <input id="preferente" v-model="form.publicado" class="mr-1" type="checkbox"/>
-            <span class="text-sm">¿Preferente?</span>
+            <input id="Publicado" v-model="form.publicado" class="mr-1" type="checkbox"/>
+            <span class="text-sm">¿Publicado?</span>
           </label>
 
         </div>
