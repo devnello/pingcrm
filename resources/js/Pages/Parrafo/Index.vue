@@ -75,10 +75,8 @@ export default {
       }
     },
     parseFromString(str) {
-      var parser = new DOMParser()
-      var doc = parser.parseFromString('<p><strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u></p>', 'text/html')
-      console.log(doc)
-      console.log(doc.body.innerHTML)
+      let parser = new DOMParser()
+      let doc = parser.parseFromString(str, 'text/html')
       return doc.body.innerHTML
     }
   }
