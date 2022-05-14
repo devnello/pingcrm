@@ -99,12 +99,10 @@ class Helper
         //            ['subscribed', '<>', '1'],
         //        ]
         $query = DB::table($tabla);
-
         if ($where_array_conditions != null) {
             $query->where($where_array_conditions);
         }
         $query->select(DB::raw('ifnull(max(' . $nombre_campo_max . '),0) as result '));
-
         $importe_total = $query->first();
         return $importe_total->result;
     }
@@ -114,8 +112,12 @@ class Helper
         $capitulo = DB::table($tabla);
         $capitulo = $capitulo->select(DB::raw($list_select_clause));
         foreach ($where_array_conditions as $item) {
-                    $capitulo->where($item[0], $item[1], $item[2]);
-                }
+            $capitulo->where($item[0], $item[1], $item[2]);
+        }
+
+        $capitulo = $capitulo->orderBy('doc_descripcion');
+        $capitulo = $capitulo->orderBy('cap_orden');
+
         return $capitulo->paginate(10);
     }
 

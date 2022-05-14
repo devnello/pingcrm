@@ -36,7 +36,6 @@ use App\Http\Controllers\ParrafoController;
 */
 
 // Auth
-
 Route::get('login', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
     ->middleware('guest');
@@ -59,7 +58,6 @@ Route::get('/', [DashboardController::class, 'index'])
     ->middleware('auth');
 */
 // Users
-
 Route::get('users', [UsersController::class, 'index'])
     ->name('users')
     ->middleware('auth');
@@ -89,7 +87,6 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->middleware('auth');
 
 // Organizations
-
 Route::get('organizations', [OrganizationsController::class, 'index'])
     ->name('organizations')
     ->middleware('auth');
@@ -119,7 +116,6 @@ Route::put('organizations/{organization}/restore', [OrganizationsController::cla
     ->middleware('auth');
 
 // Contacts
-
 Route::get('contacts', [ContactsController::class, 'index'])
     ->name('contacts')
     ->middleware('auth');
@@ -149,7 +145,6 @@ Route::put('contacts/{contact}/restore', [ContactsController::class, 'restore'])
     ->middleware('auth');
 
 // Reports
-
 Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
     ->middleware('auth');
