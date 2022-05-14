@@ -10,10 +10,15 @@ namespace App\Utils;
 
 
 use App\Exceptions\GeneralException;
+use App\Models\Account;
+use App\Models\Capitulo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 use stdClass;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
+use App\Utils\Tab;
 
 class Helper
 {
@@ -104,7 +109,20 @@ class Helper
         return $importe_total->result;
     }
 
+    static function selView($tabla, $list_select_clause, $where_array_conditions)
+    {
+        $capitulo = DB::table($tabla);
+        $capitulo = $capitulo->select(DB::raw($list_select_clause));
+        foreach ($where_array_conditions as $item) {
+                    $capitulo->where($item[0], $item[1], $item[2]);
+                }
+        return $capitulo->paginate(10);
+    }
+
     // tiene que devolver una sola fila
+    // Ejemplo de uso:
+    //  $min_booklet_situacion = Helper::selTabla(Tab::ENG_MIN_BOOKLETS_SITUACION, '*', [[Col::TC_ID, '=', $booklet->min_booklet_situacion_id],[...]);
+
     static function selTabla($tabla, $list_select_clause, $where_array_conditions): StdClass
     {
         // Where array condition
@@ -415,6 +433,7 @@ class Helper
         return strtolower($string);
     }
 
+    /*
     static function insertIntoTrace($query)
     {
         $arr['texto'] = $query->tosql();
@@ -425,4 +444,5 @@ class Helper
     {
         Helper::delTabla(Tab::ENG_MIN_TRACES, []);
     }
+    */
 }

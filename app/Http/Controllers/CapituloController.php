@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Capitulo;
+use App\Utils\Col;
+use App\Utils\Helper;
+use App\Utils\Tab;
+use App\Utils\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -28,7 +32,13 @@ class CapituloController extends Controller
 
         // OK
         // dd(Auth::user()->getAttribute('id'));
-        dd(Auth::user()->documents());
+        // Not OK
+        // dd(Auth::user()->documents());
+
+        $user_id = Auth::user()->getAttribute('id');
+
+        $capitulos = Helper::selView(View::V_PTO_CAPITULOS_00, '*', [['user_id', '=', $user_id]]);
+
 
         /*
         return Inertia::render('Organizations/Index', [
@@ -50,7 +60,7 @@ class CapituloController extends Controller
 
         return Inertia::render('Capitulos/Index', [
             'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
-            'capitulos' => Auth::user()->documentos()->capitulos()->get(),
+            'capitulos' => $capitulos,
         ]);
     }
 
