@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Utils\T;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 
-use App\Models\Capitulo;
 
 class Documento extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'pto_documentos';
+    protected $table = T::PTO_DOCUMENTOS;
 
     /*
     public function resolveRouteBinding($value, $field = null)

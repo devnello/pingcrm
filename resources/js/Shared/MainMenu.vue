@@ -37,14 +37,14 @@
       </Link>
     </div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/documentos">
+      <Link class="group flex items-center py-3" href="/capitulos">
         <icon name="printer" class="mr-2 w-4 h-4"
               :class="isUrl('documentos') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'"/>
         <div :class="isUrl('documentos') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Capitulos</div>
       </Link>
     </div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/documentos">
+      <Link class="group flex items-center py-3" href="/parrafos">
         <icon name="printer" class="mr-2 w-4 h-4"
               :class="isUrl('documentos') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'"/>
         <div :class="isUrl('documentos') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Parrafos</div>

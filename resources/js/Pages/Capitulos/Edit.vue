@@ -6,52 +6,59 @@
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="capitulo.deleted_at" class="mb-6" @restore="restore"> This documento has been
+    <trashed-message v-if="capitulo.deleted_at" class="mb-6" @restore="restore">
+      This documento has been
       deleted.
     </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <!--          <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" label="Name" />
-                    <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
-                    <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Phone" />
-                    <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" label="Address" />
-                    <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" label="City" />
-                    <text-input v-model="form.region" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2" label="Province/State" />
-                    <select-input v-model="form.country" :error="form.errors.country" class="pb-8 pr-6 w-full lg:w-1/2" label="Country">
-                      <option :value="null" />
-                      <option value="CA">Canada</option>
-                      <option value="US">United States</option>
-                    </select-input>
-                    <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />-->
           <text-input v-model="form.orden" :error="form.errors.orden" class="pb-8 pr-6 w-full lg:w-1/2" label="Orden"/>
-          <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2"
-                      label="Descripción"/>
+          <text-input
+            v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2"
+            label="Descripción"
+          />
           <label class="flex items-center mt-6 select-none" for="remember">
             <input id="publicado" v-model="form.publicado" class="mr-1" type="checkbox"/>
             <span class="text-sm">¿Publicado?</span>
           </label>
+          <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
+            <DropZone
+              :max-files="Number(10000000000)"
+              url="#"
+              :upload-on-drop="true"
+              :multiple-upload="true"
+              :parallel-upload="3"
+              @sending="sending"
+              @added-file="onFileAdd"
+            />
+          </div>
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!capitulo.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button"
-                  @click="destroy">Delete Documento
+          <button
+            v-if="!capitulo.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button"
+            @click="destroy"
+          >
+            Delete Documento
           </button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Documento
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">
+            Update Documento
           </loading-button>
         </div>
       </form>
     </div>
     <h2 class="mt-12 text-2xl font-bold">Parrafos</h2>
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
-
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 pl-6 pr-2º">Orden</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Texto</th>
         </tr>
 
-        <tr v-for="parrafo in capitulo.parrafos" :key="parrafo.id"
-            class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr
+          v-for="parrafo in capitulo.parrafos" :key="parrafo.id"
+          class="hover:bg-gray-100 focus-within:bg-gray-100"
+        >
           <!--          <td class="border-t">
                       <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/parrafos/${parrafo.id}/edit`">
                         {{ parrafo.name }}
@@ -64,9 +71,9 @@
             </Link>
           </td>
           <td class="border-t">
-<!--            <Link class="flex items-center px-6 py-4" :href="`/parrafos/${parrafo.id}/edit`" tabindex="-1">
-              {{ parrafo.descripcion }}
-            </Link>-->
+            <!--            <Link class="flex items-center px-6 py-4" :href="`/parrafos/${parrafo.id}/edit`" tabindex="-1">
+                          {{ parrafo.descripcion }}
+                        </Link>-->
             <div
               class="flex items-center px-6 py-4"
               v-html="parseFromString(parrafo.descripcion)"
@@ -96,6 +103,11 @@ import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
+import DropZone from 'dropzone-vue';
+
+// optionally import default styles
+import 'dropzone-vue/dist/dropzone-vue.common.css';
+
 export default {
   components: {
     Head,
@@ -105,6 +117,7 @@ export default {
     // SelectInput,
     TextInput,
     TrashedMessage,
+    DropZone,
   },
   layout: Layout,
   props: {
@@ -155,6 +168,19 @@ export default {
       let doc = parser.parseFromString(str, 'text/html')
       return doc.body.innerHTML
     },
-  },
+    sending(files, xhr, formData) {
+      console.log('sending')
+      console.log(files)
+      console.log(xhr)
+      console.log(formData)
+    },
+    onFileAdd(item) {
+      console.log('onFileAdd')
+      console.log(item)
+    },
+    setup() {
+      return {}
+    },
+  }
 }
 </script>

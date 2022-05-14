@@ -233,11 +233,15 @@ Route::put('documentos/{id}/restore', [DocumentoController::class, 'restore'])
 //
 // Capitulo
 //
+Route::get('capitulos', [CapituloController::class, 'index_all'])
+    ->name('capitulos')
+    ->middleware('auth');
+
 Route::get('capitulos/{id}/index', [CapituloController::class, 'index'])
     ->name('capitulos.index')
     ->middleware('auth');
 
-Route::get('capitulos/create', [CapituloController::class, 'create'])
+Route::get('capitulos/{id}/create', [CapituloController::class, 'create'])
     ->name('capitulos.create')
     ->middleware('auth');
 
@@ -262,8 +266,12 @@ Route::put('capitulos/{id}/restore', [CapituloController::class, 'restore'])
     ->middleware('auth');
 
 // Parrafo
+Route::get('parrafos', [ParrafoController::class, 'index_all'])
+    ->name('parrafos')
+    ->middleware('auth');
 
-Route::get('parrafos', [ParrafoController::class, 'index'])
+// Parraforos dosumento capitulo
+Route::get('parrafos/{documento_id}/{capitulo_id}/index', [ParrafoController::class, 'index'])
     ->name('parrafos')
     ->middleware('auth');
 

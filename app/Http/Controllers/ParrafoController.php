@@ -10,6 +10,17 @@ use Inertia\Inertia;
 
 class ParrafoController extends Controller
 {
+    public function index_all()
+    {
+        $parrafos = Parrafo::all();
+
+        return Inertia::render('Parrafos/Index', [
+            'parrafos' => [
+                'parrafos' => $parrafos,
+            ],
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

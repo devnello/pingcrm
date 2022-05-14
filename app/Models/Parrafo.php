@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\T;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Capitulo;
@@ -11,7 +12,7 @@ class Parrafo extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'pto_parrafos';
+    protected $table = T::PTO_PARRAFOS;
 
     // MSP
     public function capitulo()

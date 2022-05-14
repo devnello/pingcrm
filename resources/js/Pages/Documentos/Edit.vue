@@ -46,8 +46,10 @@
     <div class="flex flex-row justify-between items-center mt-20">
       <h2 class="text-2xl font-bold">Capitulos</h2>
       <div class="flex items-center bg-gray-50 border-t border-gray-100">
-        <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Nuevo Capitulo
-        </loading-button>
+        <button class="text-red-600 hover:underline" tabindex="-1"
+                type="button"
+                @click="createCapitulo">Nuevo Capitulo
+        </button>
       </div>
     </div>
 
@@ -150,6 +152,9 @@ export default {
         this.$inertia.put(`/documentos/${this.documento.id}/restore`)
       }
     },
+    createCapitulo(){
+      this.$inertia.get(`/capitulos/${this.documento.id}/create`)
+    }
   },
 }
 </script>

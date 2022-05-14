@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Capitulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -21,6 +22,37 @@ class CapituloController extends Controller
         return json_decode(json_encode($stdClass), true);
     }
     */
+    public function index_all()
+    {
+        //$capitulos = Capitulo::all();
+
+        // OK
+        // dd(Auth::user()->getAttribute('id'));
+        dd(Auth::user()->documents());
+
+        /*
+        return Inertia::render('Organizations/Index', [
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
+            'organizations' => Auth::user()->account->organizations()
+                ->orderBy('name')
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn ($organization) => [
+                    'id' => $organization->id,
+                    'name' => $organization->name,
+                    'phone' => $organization->phone,
+                    'city' => $organization->city,
+                    'deleted_at' => $organization->deleted_at,
+                ]),
+        ]);
+        */
+
+        return Inertia::render('Capitulos/Index', [
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
+            'capitulos' => Auth::user()->documentos()->capitulos()->get(),
+        ]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,7 +71,7 @@ class CapituloController extends Controller
             ->get();
         */
         /*
-        $facturas_ven = DB::table(View::V_GPC_FACTURAS_VEN_01)
+        $facturas_ven = DB::table(V::V_GPC_FACTURAS_VEN_01)
             ->orderBy(Col::TC_NUMERO, Cons::ORDER_BY_DESC)
             ->where(Col::TC_CLIENTE_ID, $id)
             ->whereNull(Col::TC_OFERTA_ID)
@@ -49,11 +81,6 @@ class CapituloController extends Controller
 
         #$items = $capitulos->paginate(5);
         dd('PINCO');
-        dd(['capitulos' => [
-            'capitulos' => $capitulos,
-            'capitulos' => capitulos->parrafos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion'),
-        ]
-        ]);
 
         return Inertia::render('Capitulos/Index', [
             'capitulos' => [
@@ -68,22 +95,40 @@ class CapituloController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        return Inertia::render('Capitulos/Create', [
+            'documento' => [
+                'id' => $request->id
+            ]]);
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'orden' => ['nullable', 'max:50'],
+            'descripcion' => ['required', 'max:150'],
+            // 'publicado' => ['required', 'max:1'],
+        ]);
+
+        // EStudiar que significa
+        // Auth::user()->documentos()->create($request->all());
+
+        $capitulo = new Capitulo($request->all());
+        $capitulo->save();
+
+        return Redirect::route('documentos')->with('success', 'Capitulo creado.');
+
     }
 
     /**
