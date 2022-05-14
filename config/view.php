@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | V Storage Paths
+    | View Storage Paths
     |--------------------------------------------------------------------------
     |
     | Most templating systems load templates from disk. Here you may specify
@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Compiled V Path
+    | Compiled View Path
     |--------------------------------------------------------------------------
     |
     | This option determines where all the compiled Blade templates will be

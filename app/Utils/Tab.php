@@ -19,7 +19,7 @@ WHERE TABLE_NAME like 'pto_%'
 order by table_name;
 */
 
-class T
+class Tab
 {
     const PTO_CAPITULOS = 'pto_capitulos';
     const PTO_DOCUMENTOS = 'pto_documentos';

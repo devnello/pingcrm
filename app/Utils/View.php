@@ -19,7 +19,7 @@ AND TABLE_TYPE = 'VIEW'
 order by table_name;
 */
 
-class V
+class View
 {
     const V_PTO_CAPITULOS_00 = 'v_pto_capitulos_00';
     const V_PTO_DOCUMENTOS_00 = 'v_pto_documentos_00';

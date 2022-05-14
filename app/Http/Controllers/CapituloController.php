@@ -71,7 +71,7 @@ class CapituloController extends Controller
             ->get();
         */
         /*
-        $facturas_ven = DB::table(V::V_GPC_FACTURAS_VEN_01)
+        $facturas_ven = DB::table(View::V_GPC_FACTURAS_VEN_01)
             ->orderBy(Col::TC_NUMERO, Cons::ORDER_BY_DESC)
             ->where(Col::TC_CLIENTE_ID, $id)
             ->whereNull(Col::TC_OFERTA_ID)

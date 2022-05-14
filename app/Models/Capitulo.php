@@ -9,14 +9,14 @@ use App\Models\Documento;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 
-use App\Utils\T;
+use App\Utils\Tab;
 
 class Capitulo extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = T::PTO_CAPITULOS;
+    protected $table = Tab::PTO_CAPITULOS;
 
 
     protected $fillable = [

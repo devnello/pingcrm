@@ -100,15 +100,15 @@ Client Secret: 2U6DCACWry0fwjoZp1cC6JqHNcR3U162psfUnd5U
     const TIPO_ALBARAN_MAN = 'man';
 
     // Tipo Titulo Albarán
-    const TIPO_TITULO_ALBARAN_TITULO = 'T';
+    const TIPO_TITULO_ALBARAN_TITULO = 'Tab';
     const TIPO_TITULO_ALBARAN_DESCR = 'D';
     const TIPO_TITULO_ALBARAN_PEDIDO = 'P';
 
     // Tipo Articulo
-    const TIPO_ARTICULO_TAREA = 'T';
+    const TIPO_ARTICULO_TAREA = 'Tab';
     const TIPO_ARTICULO_MATERIAL = 'M';
     const TIPO_ARTICULO_GASTO = 'G';
-    const TIPO_ARTICULO_VARIO = 'V';
+    const TIPO_ARTICULO_VARIO = 'View';
 
     // Unidades mesura
     const UNIDAD_MESURA_HORA = 'H';
@@ -135,7 +135,7 @@ Client Secret: 2U6DCACWry0fwjoZp1cC6JqHNcR3U162psfUnd5U
     const TMG_REALIZADO_ESTADO_FACTRURADO = 'facturado';
 
     // Valores flgact
-    const FLGACT_TODOS = 'T';
+    const FLGACT_TODOS = 'Tab';
     const FLGACT_ACTIVOS = 'A';
     const FLGACT_INACTIVOS = 'I';
 
