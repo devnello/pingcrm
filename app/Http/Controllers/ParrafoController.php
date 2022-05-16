@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Capitulo;
 use App\Models\Parrafo;
+use App\Utils\Helper;
+use App\Utils\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -12,12 +15,17 @@ class ParrafoController extends Controller
 {
     public function index_all()
     {
-        $parrafos = Parrafo::all();
+        // OK
+        // dd(Auth::user()->getAttribute('id'));
+        // Not OK
+        // dd(Auth::user()->documents());
+
+        $user_id = Auth::user()->getAttribute('id');
+        $parrafos = Helper::selView(View::V_PTO_PARRAFOS_00, '*', [['user_id', '=', $user_id]]);
 
         return Inertia::render('Parrafos/Index', [
-            'parrafos' => [
-                'parrafos' => $parrafos,
-            ],
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
+            'parrafos' => $parrafos,
         ]);
     }
 

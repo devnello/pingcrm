@@ -266,6 +266,10 @@ Route::get('parrafos', [ParrafoController::class, 'index_all'])
     ->middleware('auth');
 
 // Parraforos dosumento capitulo
+Route::get('parrafos', [ParrafoController::class, 'index_all'])
+    ->name('parrafos')
+    ->middleware('auth');
+
 Route::get('parrafos/{documento_id}/{capitulo_id}/index', [ParrafoController::class, 'index'])
     ->name('parrafos')
     ->middleware('auth');

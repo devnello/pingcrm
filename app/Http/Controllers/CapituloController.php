@@ -9,6 +9,7 @@ use App\Utils\Tab;
 use App\Utils\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -26,7 +27,7 @@ class CapituloController extends Controller
         return json_decode(json_encode($stdClass), true);
     }
     */
-    public function index_all()
+    public function index_all(Request $request)
     {
         //$capitulos = Capitulo::all();
 
@@ -36,9 +37,45 @@ class CapituloController extends Controller
         // dd(Auth::user()->documents());
 
         $user_id = Auth::user()->getAttribute('id');
+        // $capitulos = Helper::selView(View::V_PTO_CAPITULOS_00, '*', [['user_id', '=', $user_id]]);
 
-        $capitulos = Helper::selView(View::V_PTO_CAPITULOS_00, '*', [['user_id', '=', $user_id]]);
+        $capitulos = DB::table(View::V_PTO_CAPITULOS_00);
 
+        // SELECT LIST
+        $capitulos = $capitulos->select(DB::raw('*'));
+
+        // WHERE
+        $where_array_conditions = [['user_id', '=', $user_id]];
+        foreach ($where_array_conditions as $item) {
+            $capitulos->where($item[0], $item[1], $item[2]);
+        }
+
+        // WHERE TRASHED
+        $req = $request->only('search', 'trashed');
+        if (isset($req['trashed']) and $req['trashed'] === 'only') {
+            $capitulos->whereNotNull('deleted_at');
+        }
+
+        // WHERE SEARCH
+        if (isset($req['search'])) {
+            $capitulos->where('doc_descripcion', 'like', '%' . $req['search'] . '%');
+            $capitulos->orWhere('cap_descripcion', 'like', '%' . $req['search'] . '%');
+        }
+        // dd($req);
+        // $capitulos = $capitulos->filter($req);
+
+        // $capitulos = $capitulos->withQueryString();
+        // ORDER BY
+        $capitulos = $capitulos->orderBy('doc_descripcion');
+        $capitulos = $capitulos->orderBy('cap_orden');
+
+        // PAGINATION
+        $capitulos = $capitulos->paginate(10);
+
+        return Inertia::render('Capitulos/Index', [
+            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
+            'capitulos' => $capitulos,
+        ]);
 
         /*
         return Inertia::render('Organizations/Index', [
@@ -58,10 +95,7 @@ class CapituloController extends Controller
         ]);
         */
 
-        return Inertia::render('Capitulos/Index', [
-            'filters' => \Illuminate\Support\Facades\Request::all('search', 'trashed'),
-            'capitulos' => $capitulos,
-        ]);
+
     }
 
     /**
