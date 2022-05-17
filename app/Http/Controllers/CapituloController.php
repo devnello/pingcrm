@@ -136,6 +136,21 @@ class CapituloController extends Controller
 
     }
 
+    public function sel(Request $request)
+    {
+
+        $documento_id = $request->id;
+
+        // dd($documento_id);
+        // return Redirect::route('parrafos')->with('success', 'Capitulo creado.');
+
+        return response()->json([
+            ['id' => 1 * $request->id, 'descripcion' => 'Descripcion ' . $request->id],
+            ['id' => 2 * $request->id, 'descripcion' => 'Descripcion ' . (2 * $request->id)],
+        ]);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

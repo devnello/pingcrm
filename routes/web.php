@@ -236,6 +236,10 @@ Route::get('capitulos/{id}/index', [CapituloController::class, 'index'])
     ->name('capitulos.index')
     ->middleware('auth');
 
+Route::get('capitulos/{id}/sel', [CapituloController::class, 'sel'])
+    ->name('capitulos.sel')
+    ->middleware('auth');
+
 Route::get('capitulos/{id}/create', [CapituloController::class, 'create'])
     ->name('capitulos.create')
     ->middleware('auth');

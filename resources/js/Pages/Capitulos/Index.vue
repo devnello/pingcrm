@@ -12,8 +12,8 @@
         </select>
       </search-filter>
       <Link class="btn-indigo" href="/capitulos/create">
-        <span>Create</span>
-        <span class="hidden md:inline">&nbsp;Contact</span>
+        <span>Nuevo</span>
+        <span class="hidden md:inline"> Capitulo</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">

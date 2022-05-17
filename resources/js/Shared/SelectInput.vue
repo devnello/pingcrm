@@ -1,15 +1,16 @@
 <template>
   <div :class="$attrs.class">
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
-    <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
-      <slot />
+    <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select"
+            :class="{ error: error }">
+      <slot/>
     </select>
     <div v-if="error" class="form-error">{{ error }}</div>
   </div>
 </template>
 
 <script>
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export default {
   inheritAttrs: false,
@@ -34,6 +35,12 @@ export default {
     selected(selected) {
       this.$emit('update:modelValue', selected)
     },
+    // MSP
+    modelValue: function () {
+      this.selected =  this.modelValue
+      console.log('modelValue change') // print out when the name changes
+    },
+    // MSP
   },
   methods: {
     focus() {

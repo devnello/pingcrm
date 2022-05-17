@@ -12,8 +12,8 @@
         </select>
       </search-filter>
       <Link class="btn-indigo" href="/parrafos/create">
-        <span>Create</span>
-        <span class="hidden md:inline">Contact</span>
+        <span>Nuevo</span>
+        <span class="hidden md:inline"> Parrafo</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
