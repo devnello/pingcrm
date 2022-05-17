@@ -124,12 +124,12 @@ class CapituloController extends Controller
         */
 
         #$items = $capitulos->paginate(5);
-        dd('PINCO');
+        //dd('PINCO');
 
         return Inertia::render('Capitulos/Index', [
             'capitulos' => [
                 'capitulos' => $capitulos,
-                'capitulos' => capitulos->parrafos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion'),
+                //'capitulos' => capitulos->parrafos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion'),
             ],
         ]);
 
@@ -141,13 +141,35 @@ class CapituloController extends Controller
 
         $documento_id = $request->id;
 
-        // dd($documento_id);
-        // return Redirect::route('parrafos')->with('success', 'Capitulo creado.');
+        $capitulos = DB::table(View::V_PTO_CAPITULOS_00);
 
+        // SELECT LIST
+        $capitulos = $capitulos->select(DB::raw('capitulo_id, cap_descripcion'));
+
+        // WHERE
+        $where_array_conditions = [['documento_id', '=', $documento_id]];
+        foreach ($where_array_conditions as $item) {
+            $capitulos->where($item[0], $item[1], $item[2]);
+        }
+        $capitulos->where('cap_flgact', '=', 1);
+        // ORDER BY
+        $capitulos = $capitulos->orderBy('cap_orden');
+
+        $capitulos = $capitulos->get();
+
+        $capitulos_response = [];
+        foreach ($capitulos as $cap) {
+            $capitulos_response[] = ['id' => $cap->capitulo_id, 'descripcion' => $cap->cap_descripcion];
+        }
+        // dd($capitulos_response);
+
+        return response()->json($capitulos_response);
+        /*
         return response()->json([
             ['id' => 1 * $request->id, 'descripcion' => 'Descripcion ' . $request->id],
             ['id' => 2 * $request->id, 'descripcion' => 'Descripcion ' . (2 * $request->id)],
         ]);
+        */
 
     }
 

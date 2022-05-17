@@ -1,3 +1,13 @@
+/*
+||
+|| TODO LIST
+||
+
+
+    Utility en Python para generar validaciones en automatico a partir de los datos de BBDD.
+    Crear para tal programa fichero de configuracion tipo freqTrading y lanzarlo como script sin UI.
+*/
+
 @include('header')
 
 @include('footer')
