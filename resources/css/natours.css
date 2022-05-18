@@ -1,7 +1,10 @@
 @font-face {
     font-family: "linea-basic-10";
     src: url("/fonts/linea-basic-10.eot");
-    src: url("/fonts/linea-basic-10.eot?#iefix") format("embedded-opentype"), url("/fonts/linea-basic-10.woff") format("woff"), url("/fonts/linea-basic-10.ttf") format("truetype"), url("/fonts/linea-basic-10.svg#linea-basic-10") format("svg");
+    src: url("/fonts/linea-basic-10.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/linea-basic-10.woff") format("woff"),
+    url("/fonts/linea-basic-10.ttf") format("truetype"),
+    url("/fonts/linea-basic-10.svg#linea-basic-10") format("svg");
     font-weight: normal;
     font-style: normal
 }
@@ -673,7 +676,8 @@
 }
 
 html {
-    font-size: 62.5%
+    /*font-size: 62.5%*/
+    font-size: 100%
 }
 
 @media only screen and (max-width: 75em) {
@@ -697,7 +701,8 @@ html {
 body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 3rem
+    /*padding: 3rem*/
+    padding: 0;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -1027,7 +1032,8 @@ body {
 
 .card__picture {
     background-size: cover;
-    height: 23rem;
+    /*height: 23rem;*/
+    height: 30rem;
     background-blend-mode: screen;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -1057,7 +1063,8 @@ body {
     text-align: right;
     color: #fff;
     position: absolute;
-    top: 12rem;
+    /*top: 12rem;*/
+    top: 18rem;
     right: 2rem;
     width: 75%
 }
@@ -1066,6 +1073,15 @@ body {
     padding: 1rem 1.5rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone
+    /* Valeurs avec un mot-clé */
+
+    /*box-decoration-break: slice;*/
+    /*box-decoration-break: clone;*/
+
+    /* Valeurs globales */
+    /*box-decoration-break: initial;*/
+    /*box-decoration-break: inherit;*/
+    /*box-decoration-break: unset;*/
 }
 
 .card__heading-span--1 {

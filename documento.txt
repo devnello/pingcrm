@@ -132,3 +132,6 @@ echo \App\Models\Documento::find(1);
 echo \App\Models\Documento::all();
 
 echo Auth::user()->documentos()
+
+
+

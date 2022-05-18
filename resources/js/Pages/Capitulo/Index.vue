@@ -1,6 +1,11 @@
 <template>
   <user-menu/>
   <main class="container">
+    <div class="u-center-text u-margin-bottom-big">
+      <h2 class="heading-secondary">
+        Historias Universitario
+      </h2>
+    </div>
     <h1 class="mb-10 pt-10 text-center text-3xl font-bold">Historias Universitario</h1>
     <div id="id_grid" class="grid grid-cols-4">
       <template v-for="capitulo in capitulos" :key="capitulo.id">
@@ -16,34 +21,36 @@
                 class="card__picture"
                 :style="getBackground('/images/' + capitulo.imagen)">
               </div>
-              <h4 class="card__heading">
-                <span class="card__heading-span card__heading-span--2">The Forest Hiker</span>
-              </h4>
+              <!--Heading-->
+              <!--<h4 class="card__heading">
+                    <span class="card__heading-span card__heading-span&#45;&#45;2">{{ capitulo.descripcion }}</span>
+                  </h4>-->
               <div class="card__details">
                 <ul>
-                  <li>7 day tours</li>
-                  <li>Up to 40 people</li>
-                  <li>6 tour guides</li>
-                  <li>Sleep in provided tents</li>
-                  <li>Difficulty: medium</li>
+                  <li>{{ capitulo.descripcion }}</li>
+                  <li>Texto 1</li>
+                  <li>Texto 2</li>
                 </ul>
               </div>
-
             </div>
             <div class="card__side card__side--back card__side--back-2">
               <div class="card__cta">
                 <div class="card__price-box">
-                  <p class="card__price-only">Only</p>
-                  <p class="card__price-value">$497</p>
+                  <p class="card__price-only">Texto 1</p>
+                  <p class="card__price-only">Texto 2</p>
+                  <p class="card__price-value">Texto 3</p>
+                  <p class="card__price-value">Texto 4</p>
                 </div>
-                <a href="#popup" class="btn btn--white">Book now!</a>
+                <a href="#popup" class="btn btn--white">Haz algo!</a>
               </div>
             </div>
           </div>
           <!--Fin-Card-->
+          <!--
           <h2 id="texto_Imagen" class="h-8 my-5 text-center font-bold">
             <span class="text-red-900 font-black">{{ capitulo.descripcion }}</span>
           </h2>
+          -->
         </div>
       </template>
     </div>
@@ -181,8 +188,17 @@ export default {
       return '/images/' + capImage
     },
     getBackground(url) {
-      let overlay = 'linear-gradient(to right bottom,#7ed56f, #28b485)';
-      return 'background-image:' + overlay + ' , url(' + url + ');';
+      let overlay1 = 'linear-gradient(to right bottom, #ffb900, #ff7730)'
+      let overlay2 = 'linear-gradient(to right bottom,#7ed56f, #28b485)'
+      let overlay3 = 'linear-gradient(to right bottom, #2998ff, #5643fa)'
+
+      let overlay1_webkit = '-webkit-gradient(linear, left top, right bottom, from(#ffb900), to(#ff7730))'
+      let overlay2_webkit = '-webkit-gradient(linear, left top, right bottom, from(#7ed56f), to(#28b485))'
+      let overlay3_webkit = '-webkit-gradient(linear, left top, right bottom, from(#2998ff), to(#5643fa))'
+
+      // return 'background-image:' + overlay2 + ' , url(' + url + ');'
+      return 'background-image:' + overlay2_webkit + ' , url(' + url + ');' +
+             'background-image:' + overlay2 +        ' , url(' + url + ')'
     }
   },
   data() {
@@ -198,7 +214,9 @@ export default {
     }
   },
   beforeCreate() {
-    // document.querySelector('body').setAttribute('style', 'background:#fff')
+    // document.querySelector('body').setAttribute('style', 'background:#fff'
+    document.querySelector('html').setAttribute('style', 'font-size:62.5%')
+    document.querySelector('body').setAttribute('style', 'padding:3rem')
   },
   beforeUnmount() {
     // document.querySelector('body').setAttribute('style', '')
