@@ -70,17 +70,17 @@
                       </Link>
                     </td>-->
           <td class="border-t">
-            <Link class="flex items-center pl-6 pr-2" :href="`/capitulos/${capitulo.id}/edit`" tabindex="-1">
+            <Link class="flex items-center pl-6 pr-2" :href="`/capitulos/${documento.id}/${capitulo.id}/edit`" tabindex="-1">
               {{ capitulo.orden }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/capitulos/${capitulo.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4" :href="`/capitulos/${documento.id}/${capitulo.id}/edit`" tabindex="-1">
               {{ capitulo.descripcion }}
             </Link>
           </td>
           <td class="w-px border-t">
-            <Link class="flex items-center px-4" :href="`/capitulos/${capitulo.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-4" :href="`/capitulos/${documento.id}/${capitulo.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400"/>
             </Link>
           </td>
@@ -104,6 +104,7 @@ import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
+  name: 'DocumentosEdit',
   components: {
     Head,
     Icon,
@@ -152,7 +153,7 @@ export default {
         this.$inertia.put(`/documentos/${this.documento.id}/restore`)
       }
     },
-    createCapitulo(){
+    createCapitulo() {
       this.$inertia.get(`/capitulos/${this.documento.id}/create`)
     }
   },

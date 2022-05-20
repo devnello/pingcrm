@@ -67,6 +67,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axios from 'axios'
 
 export default {
+  name: 'ParrafosCreate',
   components: {
     Head,
     // Icon,

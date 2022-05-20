@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Capitulo;
+use App\Models\Documento;
 use App\Utils\Col;
 use App\Utils\Helper;
 use App\Utils\Tab;
@@ -232,7 +233,10 @@ class CapituloController extends Controller
     public function edit(Request $request)
     {
         // Selecccion todos los Parrafos de el capitulo id
-        $capitulo = Capitulo::findOrFail($request->id);
+
+        $capitulo = Documento::find($request->documento_id)->capitulos->find($request->capitulo_id);
+
+
         //$parrafos = $capitulo->parrafos()->get();
 
         /*
@@ -245,7 +249,8 @@ class CapituloController extends Controller
 
         return Inertia::render('Capitulos/Edit', [
             'capitulo' => [
-                'id' => $capitulo->id,
+                'documento_id' => $request->documento_id,
+                'capitulo_id' => $request->capitulo_id,
                 'orden' => $capitulo->orden,
                 'descripcion' => $capitulo->descripcion,
                 'publicado' => $capitulo->publicado == 1,
@@ -254,6 +259,13 @@ class CapituloController extends Controller
             ],
         ]);
 
+    }
+
+    public function upload(Request $request)
+    {
+        //dd($request);
+
+        return response()->json($request->file);
     }
 
     /**

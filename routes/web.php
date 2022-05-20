@@ -248,8 +248,16 @@ Route::post('capitulos', [CapituloController::class, 'store'])
     ->name('capitulos.store')
     ->middleware('auth');
 
-Route::get('capitulos/{id}/edit', [CapituloController::class, 'edit'])
+Route::get('capitulos/{documento_id}/{capitulo_id}/edit', [CapituloController::class, 'edit'])
     ->name('capitulos.edit')
+    ->middleware('auth');
+
+/*Route::post('capitulos/{documento_id}/{capitulo_id}/upload', [CapituloController::class, 'upload'])
+    ->name('capitulos.upload')
+    ->middleware('auth');*/
+
+Route::post('capitulos/upload', [CapituloController::class, 'upload'])
+    ->name('capitulos.upload')
     ->middleware('auth');
 
 Route::put('capitulos/{id}', [CapituloController::class, 'update'])

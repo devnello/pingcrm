@@ -77,6 +77,7 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
+  name: 'ParrafosIndex',
   components: {
     Head,
     Icon,

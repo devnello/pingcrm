@@ -62,25 +62,28 @@
 
       <!--Parrafo-->
       <div
-        v-if="parrafos[index].descripcion"
+        v-if="parrafos != null && parrafos.length > 0 && parrafos[index].descripcion"
         class="border-2 border-solid border-black rounded-2xl text-center my-2 py-3"
         v-html="parseFromString(parrafos[index].descripcion)"
       />
+      <div v-else>
+        <p>No se han encontrado Parrafos para este capitulo</p>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
 
-import Icon from '@/Shared/Icon'
-import {Link} from '@inertiajs/inertia-vue3'
-import UserMenu from "@/Shared/UserMenu";
+//import Icon from '@/Shared/Icon'
+//import {Link} from '@inertiajs/inertia-vue3'
+import UserMenu from '@/Shared/UserMenu'
 
 export default {
   name: 'ParrafoIndex',
   components: {
-    Icon,
-    Link,
+    //Icon,
+    //Link,
     UserMenu
   },
   props: {

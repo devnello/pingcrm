@@ -34,6 +34,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
+  name: 'CapitulosCreate',
   components: {
     Head,
     Link,

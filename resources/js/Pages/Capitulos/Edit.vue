@@ -11,7 +11,29 @@
       deleted.
     </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
+
+      <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
+        <DropZone
+          :max-files="Number(10000000000)"
+          url="/capitulos/upload"
+          :upload-on-drop="true"
+          :multiple-upload="true"
+          :parallel-upload="3"
+          :headers="{'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')}"
+          @sending="sending"
+          @added-file="onFileAdd"
+        />
+      </div>
+
+      <!--      <DropZone
+              id="drop1"
+              ref="dropzone"
+              :options="dropOptions"
+              @vdropzone-complete="afterComplete"
+            />
+            <button @click="removeAllFiles">Remove All Files</button>-->
       <form @submit.prevent="update">
+
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.orden" :error="form.errors.orden" class="pb-8 pr-6 w-full lg:w-1/2" label="Orden"/>
           <text-input
@@ -22,17 +44,7 @@
             <input id="publicado" v-model="form.publicado" class="mr-1" type="checkbox"/>
             <span class="text-sm">¿Publicado?</span>
           </label>
-          <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
-            <DropZone
-              :max-files="Number(10000000000)"
-              url="#"
-              :upload-on-drop="true"
-              :multiple-upload="true"
-              :parallel-upload="3"
-              @sending="sending"
-              @added-file="onFileAdd"
-            />
-          </div>
+
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button
@@ -109,6 +121,7 @@ import DropZone from 'dropzone-vue';
 import 'dropzone-vue/dist/dropzone-vue.common.css';
 
 export default {
+  name: 'CapitulosEdit',
   components: {
     Head,
     Icon,
@@ -127,6 +140,16 @@ export default {
   remember: 'form',
   data() {
     return {
+      dropOptions: {
+        url: '/capitulos/upload',
+        maxFilesize: 2, // MB
+        maxFiles: 4,
+        chunking: true,
+        chunkSize: 500, // Bytes
+        thumbnailWidth: 150, // px
+        thumbnailHeight: 150,
+        addRemoveLinks: true
+      },
       /*
       form: this.$inertia.form({
         first_name: this.contact.first_name,
@@ -150,6 +173,9 @@ export default {
     }
   },
   methods: {
+    upload() {
+      this.form.post('/capitulos/upload')
+    },
     update() {
       this.form.put(`/capitulos/${this.capitulo.id}`)
     },
@@ -181,6 +207,27 @@ export default {
     setup() {
       return {}
     },
-  }
+    afterComplete(file) {
+      console.log(file);
+    },
+    removeAllFiles() {
+      this.$refs.dropzone.removeAllFiles();
+    },
+    getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie)
+      let ca = decodedCookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1)
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length)
+        }
+      }
+      return ''
+    },
+  },
 }
 </script>

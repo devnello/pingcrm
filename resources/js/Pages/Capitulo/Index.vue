@@ -41,7 +41,10 @@
                   <p class="card__price-value">Texto 3</p>
                   <p class="card__price-value">Texto 4</p>
                 </div>
-                <a href="#popup" class="btn btn--white">Haz algo!</a>
+                <!--<a href="#popup" class="btn btn&#45;&#45;white">Haz algo!</a>-->
+                <Link class="btn btn--white" :href="`/capitulo/${capitulo.id}`">
+                  Inicio!
+                </Link>
               </div>
             </div>
           </div>
@@ -170,14 +173,14 @@
 <script>
 
 //import Icon from '@/Shared/Icon'
-//import {Link} from '@inertiajs/inertia-vue3'
+import {Link} from '@inertiajs/inertia-vue3'
 import UserMenu from '@/Shared/UserMenu'
 
 export default {
-  name: 'CapitulosIndex',
+  name: 'CapituloIndex',
   components: {
     //Icon,
-    //Link,
+    Link,
     UserMenu,
   },
   props: {
@@ -198,11 +201,13 @@ export default {
 
       // return 'background-image:' + overlay2 + ' , url(' + url + ');'
       return 'background-image:' + overlay2_webkit + ' , url(' + url + ');' +
-             'background-image:' + overlay2 +        ' , url(' + url + ')'
+        'background-image:' + overlay2 + ' , url(' + url + ')'
     }
   },
   data() {
     return {
+      htmlStyle: null,
+      bodyStyle: null,
       nombre: ['N 1', 'N 2', 'N 3', 'N 4', 'N 5', 'N 6', 'N 7', 'N 8', 'N 9', 'N 10'],
       images: ['adam-smith.png', 'alberto-benegas-lynch.png', 'alisa-zinóvievna-rosenbaum.png',
         'anxo-bastos.png', 'carl-menger.png', 'chatbot.png', 'claude-fréderic-bastiat.png',
@@ -215,11 +220,17 @@ export default {
   },
   beforeCreate() {
     // document.querySelector('body').setAttribute('style', 'background:#fff'
+    this.htmlStyle = document.querySelector('html').getAttribute('style')
+    // console.log(htmlStyle)
+    this.bodyStyle = document.querySelector('body').getAttribute('style')
+    // console.log(bodyStyle)
     document.querySelector('html').setAttribute('style', 'font-size:62.5%')
     document.querySelector('body').setAttribute('style', 'padding:3rem')
   },
   beforeUnmount() {
     // document.querySelector('body').setAttribute('style', '')
+    document.querySelector('html').setAttribute('style', this.htmlStyle)
+    document.querySelector('body').setAttribute('style', this.bodyStyle)
   },
 }
 </script>

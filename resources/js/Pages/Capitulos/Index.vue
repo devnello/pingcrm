@@ -69,6 +69,7 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
+  name: 'CapitulosIndex',
   components: {
     Head,
     Icon,
