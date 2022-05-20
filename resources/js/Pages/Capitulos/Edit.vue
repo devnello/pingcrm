@@ -15,7 +15,7 @@
       <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
         <DropZone
           :max-files="Number(10000000000)"
-          url="/capitulos/upload"
+          :url="'/capitulos/'+capitulo.documento_id+'/'+capitulo.capitulo_id+'/upload'"
           :upload-on-drop="true"
           :multiple-upload="true"
           :parallel-upload="3"

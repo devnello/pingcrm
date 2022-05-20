@@ -256,7 +256,7 @@ Route::get('capitulos/{documento_id}/{capitulo_id}/edit', [CapituloController::c
     ->name('capitulos.upload')
     ->middleware('auth');*/
 
-Route::post('capitulos/upload', [CapituloController::class, 'upload'])
+Route::post('capitulos/{documento_id}/{capitulo_id}/upload', [CapituloController::class, 'upload'])
     ->name('capitulos.upload')
     ->middleware('auth');
 

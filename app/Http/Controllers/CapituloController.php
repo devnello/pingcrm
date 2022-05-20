@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Intervention\Image\Facades\Image;
 
 class CapituloController extends Controller
 {
@@ -263,9 +265,21 @@ class CapituloController extends Controller
 
     public function upload(Request $request)
     {
-        //dd($request);
+        $imagen = $request->file('file');
 
-        return response()->json($request->file);
+        $nombreImagen = Str::uuid() . '.' . $imagen->extension();
+
+        $imageServidor = Image::make($imagen);
+        $imageServidor->fit(1000, 1000);
+
+        $imagePath = public_path('uploads') . '/' . $nombreImagen;
+        $imageServidor->save($imagePath);
+
+        return response()->json([
+            ['documento_id' => $request->documento_id],
+            ['capitulo_id' => $request->capitulo_id],
+            ['imagen' => $nombreImagen]
+        ]);
     }
 
     /**
