@@ -275,10 +275,16 @@ class CapituloController extends Controller
         $imagePath = public_path('uploads') . '/' . $nombreImagen;
         $imageServidor->save($imagePath);
 
+        // Update Capitulo
+        $capitulo = Capitulo::getCapitulo($request->documento_id, $request->capitulo_id);
+        // Helper::updTabla(Tab::PTO_CAPITULOS, [[Col::TC_ID, '=', $elem->id]], [Col::TC_ORD => $index++]);
+
+
         return response()->json([
             ['documento_id' => $request->documento_id],
             ['capitulo_id' => $request->capitulo_id],
-            ['imagen' => $nombreImagen]
+            ['imagen' => $nombreImagen],
+            ['capitulo' => $capitulo],
         ]);
     }
 

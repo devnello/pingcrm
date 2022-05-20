@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Utils\Helper;
+use App\Utils\View;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Parrafo;
@@ -34,6 +36,13 @@ class Capitulo extends Model
     public function parrafos()
     {
         return $this->hasMany(Parrafo::class);
+    }
+
+    static function getCapitulo($document_id, $capitulo_id)
+    {
+        return Helper::SelView(View::V_PTO_CAPITULOS_00, '*', [
+            ['documento_id', '=', $document_id], ['capitulo_id', '=', $capitulo_id]
+        ]);
     }
 
 
