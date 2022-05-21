@@ -91,7 +91,7 @@ class DocumentoController extends Controller
                 'descripcion' => $documento->descripcion,
                 'publicado' => $documento->publicado == 1,
                 'deleted_at' => $documento->deleted_at,
-                'capitulos' => $documento->capitulos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion'),
+                'capitulos' => $documento->capitulos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion','imagen'),
             ],
         ]);
     }

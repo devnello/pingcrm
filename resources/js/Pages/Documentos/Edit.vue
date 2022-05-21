@@ -58,7 +58,8 @@
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 pl-6 pr-2º">Orden</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Texto</th>
+          <th class="pb-4 pt-6 px-6">Texto</th>
+          <th class="pb-4 pt-6 px-6" colspan="2">Imagen</th>
         </tr>
 
         <tr v-for="capitulo in documento.capitulos" :key="capitulo.id"
@@ -79,6 +80,11 @@
               {{ capitulo.descripcion }}
             </Link>
           </td>
+
+          <td class="border-t">
+            <img class="max-h-20 mx-auto p-3" :src="`/images/${capitulo.imagen}`" alt="" />
+          </td>
+
           <td class="w-px border-t">
             <Link class="flex items-center px-4" :href="`/capitulos/${documento.id}/${capitulo.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400"/>

@@ -256,6 +256,7 @@ class CapituloController extends Controller
                 'orden' => $capitulo->orden,
                 'descripcion' => $capitulo->descripcion,
                 'publicado' => $capitulo->publicado == 1,
+                'imagen' => $capitulo->imagen,
                 'deleted_at' => $capitulo->deleted_at,
                 'parrafos' => $capitulo->parrafos()/*->orderByName()*/ ->get()->map->only('id', 'orden', 'descripcion'),
             ],
@@ -277,7 +278,12 @@ class CapituloController extends Controller
 
         // Update Capitulo
         $capitulo = Capitulo::getCapitulo($request->documento_id, $request->capitulo_id);
-        // Helper::updTabla(Tab::PTO_CAPITULOS, [[Col::TC_ID, '=', $elem->id]], [Col::TC_ORD => $index++]);
+        Helper::updTabla(Tab::PTO_CAPITULOS,
+            [
+                [Col::TC_DOCUMENTO_ID, '=', $request->documento_id],
+                [Col::TC_ID, '=', $request->capitulo_id],
+            ],
+            [Col::TC_IMAGEN => $nombreImagen]);
 
 
         return response()->json([

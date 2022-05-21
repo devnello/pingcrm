@@ -21,6 +21,7 @@
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 px-6">Orden</th>
           <th class="pb-4 pt-6 px-6">Documento</th>
+          <th class="pb-4 pt-6 px-6">Imagen</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Capitulo</th>
         </tr>
         <tr v-for="capitulo in capitulos.data" :key="capitulo.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -35,6 +36,9 @@
               {{ capitulo.doc_descripcion }}
               <icon v-if="capitulo.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400"/>
             </Link>
+          </td>
+          <td class="border-t">
+            <img class="max-h-20 mx-auto p-3" :src="'/images/adam-smith.png'" alt="" />
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/capitulos/${capitulo.id}/edit`" tabindex="-1">

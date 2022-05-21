@@ -12,7 +12,6 @@
     </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <img class="w-40" :src="`/uploads/${capitulo.imagen}`" alt="">
-      <input type="file" @change="onSelectedfile">
 
       <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
         <DropZone
@@ -214,9 +213,6 @@ export default {
     },
     removeAllFiles() {
       this.$refs.dropzone.removeAllFiles();
-    },
-    onSelectedfile(event) {
-      console.log(event)
     },
     getCookie(cname) {
       let name = cname + "=";
