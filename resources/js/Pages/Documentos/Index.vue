@@ -22,7 +22,6 @@
           <tr class="text-left font-bold">
             <th class="pb-4 pt-6 px-6">Orden</th>
             <th class="pb-4 pt-6 px-6">Descripción</th>
-            <th class="pb-4 pt-6 px-6">Imagen</th>
             <th class="pb-4 pt-6 px-6" colspan="2">Publicado</th>
           </tr>
         </thead>
@@ -44,9 +43,6 @@
               <Link class="flex items-center px-6 py-4" :href="`/documentos/${documento.id}/edit`" tabindex="-1">
                 {{ documento.descripcion }}
               </Link>
-            </td>
-            <td class="border-t">
-              <img class="max-h-20 mx-auto p-3" :src="'/images/adam-smith.png'" alt="" />
             </td>
             <td class="border-t">
               <Link class="flex items-center px-6 py-4" :href="`/documentos/${documento.id}/edit`" tabindex="-1">

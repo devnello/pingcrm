@@ -1,6 +1,6 @@
 <template>
   <user-menu/>
-  <main class="container">
+  <main class="container mx-auto">
     <div class="u-center-text u-margin-bottom-big">
       <h2 class="heading-secondary">
         Historias Universitario
@@ -13,13 +13,14 @@
           <!--
           <Link :href="`/capitulo/${capitulo.id}`">
             <img class="max-h-48 mx-auto p-3" :src="'/images/' + capitulo.imagen" alt="" />
-          </Link>-->
+          </Link>
+          -->
           <!--Card-->
           <div class="card">
             <div class="card__side card__side--front">
               <div
                 class="card__picture"
-                :style="getBackground('/images/' + capitulo.imagen)">
+                :style="getBackground(capitulo.imagen)">
               </div>
               <!--Heading-->
               <!--<h4 class="card__heading">
@@ -199,9 +200,15 @@ export default {
       let overlay2_webkit = '-webkit-gradient(linear, left top, right bottom, from(#7ed56f), to(#28b485))'
       let overlay3_webkit = '-webkit-gradient(linear, left top, right bottom, from(#2998ff), to(#5643fa))'
 
+      if (url !== null) {
+        return 'background-image:' + overlay2_webkit + ' , url(' + '/uploads/' + url + ');' +
+          'background-image:' + overlay2 + ' , url(' + '/uploads/' + url + ')'
+      } else {
+        return 'background-image:' + overlay2_webkit + ' ' + 'background-image:' + overlay2
+      }
+
       // return 'background-image:' + overlay2 + ' , url(' + url + ');'
-      return 'background-image:' + overlay2_webkit + ' , url(' + url + ');' +
-        'background-image:' + overlay2 + ' , url(' + url + ')'
+
     }
   },
   data() {

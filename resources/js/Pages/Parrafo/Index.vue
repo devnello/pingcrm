@@ -63,7 +63,7 @@
       <!--Parrafo-->
       <div
         v-if="parrafos != null && parrafos.length > 0 && parrafos[index].descripcion"
-        class="border-2 border-solid border-black rounded-2xl text-center my-2 py-3"
+        class="border-2 border-solid border-black rounded-2xl text-center my-2 py-3 text-3xl"
         v-html="parseFromString(parrafos[index].descripcion)"
       />
       <div v-else>

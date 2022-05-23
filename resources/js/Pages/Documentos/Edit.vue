@@ -82,7 +82,7 @@
           </td>
 
           <td class="border-t">
-            <img class="max-h-20 mx-auto p-3" :src="`/images/${capitulo.imagen}`" alt="" />
+            <img class="max-h-20 mx-auto p-3" :src="`/uploads/${capitulo.imagen}`" alt="" />
           </td>
 
           <td class="w-px border-t">
