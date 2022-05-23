@@ -11,6 +11,7 @@ use App\Utils\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -277,14 +278,27 @@ class CapituloController extends Controller
         $imageServidor->save($imagePath);
 
         // Update Capitulo
-        $capitulo = Capitulo::getCapitulo($request->documento_id, $request->capitulo_id);
+        //$capitulo = Capitulo::getCapitulo($request->documento_id, $request->capitulo_id);
+        $capitulo = Capitulo::findOrFail($request->capitulo_id);
+
+        $imagePathToDelete = public_path('uploads') . '/' . $capitulo->imagen;
+        // dd($imagePathToDelete);
+
+        if (File::exists($imagePathToDelete)) {
+            File::delete($imagePathToDelete);
+        }
+
+        $capitulo->imagen = $nombreImagen;
+        $capitulo->save();
+
+        /*
         Helper::updTabla(Tab::PTO_CAPITULOS,
             [
                 [Col::TC_DOCUMENTO_ID, '=', $request->documento_id],
                 [Col::TC_ID, '=', $request->capitulo_id],
             ],
             [Col::TC_IMAGEN => $nombreImagen]);
-
+        */
 
         return response()->json([
             ['documento_id' => $request->documento_id],

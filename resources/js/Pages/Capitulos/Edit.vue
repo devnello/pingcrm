@@ -11,8 +11,13 @@
       deleted.
     </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-      <img class="w-40" :src="`/uploads/${capitulo.imagen}`" alt="">
-      <input type="file" @change="onSelectedfile">
+      <img class="w-40" :src="`/uploads/${avatar}`" alt=""/>
+      <input type="file" @change="onFileSelected"/>
+      <!--      <input type="file" @input="form.avatar = $event.target.files[0]" />
+            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+              {{ form.progress.percentage }}%
+            </progress>-->
+      <button @click="axiosPost">Upload</button>
 
       <div style="height: 500px; width: 500px; border: 1px solid red; position: relative;">
         <DropZone
@@ -35,7 +40,6 @@
             />
             <button @click="removeAllFiles">Remove All Files</button>-->
       <form @submit.prevent="update">
-
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.orden" :error="form.errors.orden" class="pb-8 pr-6 w-full lg:w-1/2" label="Orden"/>
           <text-input
@@ -46,7 +50,6 @@
             <input id="publicado" v-model="form.publicado" class="mr-1" type="checkbox"/>
             <span class="text-sm">¿Publicado?</span>
           </label>
-
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button
@@ -117,10 +120,11 @@ import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
-import DropZone from 'dropzone-vue';
+import DropZone from 'dropzone-vue'
 
 // optionally import default styles
-import 'dropzone-vue/dist/dropzone-vue.common.css';
+import 'dropzone-vue/dist/dropzone-vue.common.css'
+import axios from 'axios'
 
 export default {
   name: 'CapitulosEdit',
@@ -142,6 +146,7 @@ export default {
   remember: 'form',
   data() {
     return {
+      avatar: this.capitulo.imagen,
       dropOptions: {
         url: '/capitulos/upload',
         maxFilesize: 2, // MB
@@ -150,7 +155,7 @@ export default {
         chunkSize: 500, // Bytes
         thumbnailWidth: 150, // px
         thumbnailHeight: 150,
-        addRemoveLinks: true
+        addRemoveLinks: true,
       },
       /*
       form: this.$inertia.form({
@@ -210,20 +215,38 @@ export default {
       return {}
     },
     afterComplete(file) {
-      console.log(file);
+      console.log(file)
     },
     removeAllFiles() {
-      this.$refs.dropzone.removeAllFiles();
+      this.$refs.dropzone.removeAllFiles()
     },
-    onSelectedfile(event) {
-      console.log(event)
+    onFileSelected(event) {
+      console.log(event.target.files[0])
+      // this.avatar = event.target.files[0]
+      // setTimeout(this.axiosPost, 10, event)
+      this.axiosPost(event)
+    },
+    axiosPost(event) {
+      const fd = new FormData()
+      fd.append('file', event.target.files[0])
+      fd.append('documento_id', this.capitulo.documento_id)
+      fd.append('capitulo_id', this.capitulo.capitulo_id)
+
+      axios.post('/capitulos/upload', fd).then(response => {
+        // this.capitulo.imagen = 1
+        // todo mejorar el retorno de datos
+        console.log(response.data[2].imagen)
+        this.avatar = response.data[2].imagen
+      }).catch(error => {
+        console.error('There was an error!', error)
+      })
     },
     getCookie(cname) {
-      let name = cname + "=";
+      let name = cname + '='
       let decodedCookie = decodeURIComponent(document.cookie)
       let ca = decodedCookie.split(';')
       for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
+        let c = ca[i]
         while (c.charAt(0) === ' ') {
           c = c.substring(1)
         }
@@ -236,3 +259,34 @@ export default {
   },
 }
 </script>
+
+<!--
+<template>
+  <form @submit.prevent="submit">
+    <input type="text" v-model="form.name" />
+    <input type="file" @input="form.avatar = $event.target.files[0]" />
+    <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+      {{ form.progress.percentage }}%
+    </progress>
+    <button type="submit">Submit</button>
+  </form>
+</template>
+
+<script>
+import { useForm } from '@inertiajs/inertia-vue3'
+
+export default {
+  setup () {
+    const form = useForm({
+      name: null,
+      avatar: null,
+    })
+
+    function submit() {
+      form.post('/users')
+    }
+
+    return { form, submit }
+  },
+}
+</script>-->
