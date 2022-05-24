@@ -60,6 +60,12 @@
         <h1 id="parrafo" class="text-4xl">{{ descripcion_cap }}</h1>
       </div>
 
+      <div id="typewriter" class="text-4xl border-2 border-black">
+      </div>
+      <button @click="startTyping">
+        Start
+      </button>
+
       <!--Parrafo-->
       <div
         v-if="parrafos != null && parrafos.length > 0 && parrafos[index].descripcion"
@@ -78,6 +84,7 @@
 //import Icon from '@/Shared/Icon'
 //import {Link} from '@inertiajs/inertia-vue3'
 import UserMenu from '@/Shared/UserMenu'
+import Typewriter from 'typewriter-effect/dist/core';
 
 export default {
   name: 'ParrafoIndex',
@@ -112,6 +119,24 @@ export default {
     // document.querySelector('body').setAttribute('style', '')
   },
   methods: {
+    startTyping() {
+      // const app = document.getElementById('app')
+
+      let typewriter = new Typewriter('#typewriter', {
+        loop: true,
+        delay: 75,
+      })
+
+      typewriter
+        .pauseFor(2500)
+        .typeString('A simple yet powerful native javascript')
+        .pauseFor(300)
+        .deleteChars(10)
+        .typeString('<strong>JS</strong> plugin for a cool typewriter effect and ')
+        .typeString('<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>')
+        .pauseFor(1000)
+        .start()
+    },
     increment() {
       this.index++
       if (this.index > this.parrafos.length - 1) {
