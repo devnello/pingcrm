@@ -98,6 +98,8 @@ export default {
   },
   data() {
     return {
+      typewriter: null,
+      deleteSpeed: 0.01,
       capitulo_id: this.data.capitulo.id,
       index: 0,
       descripcion_cap: this.data.capitulo.descripcion,
@@ -118,23 +120,39 @@ export default {
   beforeUnmount() {
     // document.querySelector('body').setAttribute('style', '')
   },
+  mounted() {
+    this.typewriter = new Typewriter('#typewriter', {
+      loop: false,
+      delay: 75,
+    })
+  },
   methods: {
     startTyping() {
       // const app = document.getElementById('app')
 
-      let typewriter = new Typewriter('#typewriter', {
-        loop: true,
-        delay: 75,
-      })
+      /*
+      this.typewriter = new Typewriter('#typewriter', {
+          loop: false,
+          delay: 75,
+        })
+        */
 
-      typewriter
-        .pauseFor(2500)
-        .typeString('A simple yet powerful native javascript')
-        .pauseFor(300)
-        .deleteChars(10)
-        .typeString('<strong>JS</strong> plugin for a cool typewriter effect and ')
-        .typeString('<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>')
-        .pauseFor(1000)
+      this.typewriter
+        .pauseFor(500)
+        //.typeString('A simple yet powerful native javascript')
+        //.pauseFor(300)
+        //.deleteChars(10)
+        //.typeString('<strong>JS</strong> plugin for a cool typewriter effect and ')
+        .typeString('<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>' +
+          '<strong><u>Estas </u></strong><u>es mi </u><u style="color: rgb(230, 0, 0);">casa</u>')
+        //.typeString('<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>')
+        //.pauseFor(1000)
         .start()
     },
     increment() {
@@ -142,18 +160,32 @@ export default {
       if (this.index > this.parrafos.length - 1) {
         this.index = this.parrafos.length - 1
       }
+
+      this.typewriter.deleteAll(this.deleteSpeed)
+      this.typewriter.typeString(this.parseFromString(this.parrafos[this.index].descripcion))
+      this.typewriter.start()
+
     },
     decrement() {
       this.index--
       if (this.index < 0) {
         this.index = 0
       }
+      this.typewriter.deleteAll(this.deleteSpeed)
+      this.typewriter.typeString(this.parseFromString(this.parrafos[this.index].descripcion))
+      this.typewriter.start()
     },
     inicio() {
       this.index = 0
+      this.typewriter.deleteAll(this.deleteSpeed)
+      this.typewriter.typeString(this.parseFromString(this.parrafos[this.index].descripcion))
+      this.typewriter.start()
     },
     fin() {
       this.index = this.parrafos.length - 1
+      this.typewriter.deleteAll(this.deleteSpeed)
+      this.typewriter.typeString(this.parseFromString(this.parrafos[this.index].descripcion))
+      this.typewriter.start()
     },
     parseFromString(str) {
       let parser = new DOMParser()
